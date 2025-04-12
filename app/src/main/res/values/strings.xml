@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">assesmobpro1</string>
+    <string name="app_name">Tambal Ban</string>
+    <string name="customer_name">Nama</string>
+    <string name="service_type">Jenis Layanan</string>
+    <string name="submit">Pesan</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="copyright">Tambal ban merupakan sebuah aplikasi Android untuk jasa tambal ban sehingga
+seseorang dapat mempermudah pekerjaannya.\n\nAplikasi ini dibuat untuk kelas
+Pemrograman untuk Perangkat Bergerak 1.\n\nCopyright © 2024-2025 Della Silvira</string>
+    <string name="share">Bagikan</string>
+    <string name="banner">Banner Tambal Ban</string>
+    <string name="share_template">Nama: %1$s\nLayanan: %2$s\nHarga: Rp%3$d\nLokasi: %4$s</string>
+    <string name="back">Kembali</string>
 </resources>
