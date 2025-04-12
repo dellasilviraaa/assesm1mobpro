@@ -1,5 +1,7 @@
 package com.dellas0095.assesmobpro1
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -107,6 +111,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         "Isi Angin" -> 5000
         else -> 0
     }
+    val context = LocalContext.current
 
 
     Column(
@@ -200,9 +205,32 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                     Text(text = "Layanan: $layanan", style = MaterialTheme.typography.bodySmall)
                     Text(text = "Harga Layanan: Rp$harga", style = MaterialTheme.typography.bodySmall)
 
+                    Button(
+                        onClick = {
+                            shareData(
+                                context = context,
+                                message = context.getString(R.string.share_template,
+                                    nama, layanan, harga,lokasi)
+                            )
+                        },
+                        modifier = Modifier.padding(top = 8.dp),
+                        contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+                    ) {
+                        Text(text = stringResource(R.string.share))
+                    }
                 }
             }
         }
+    }
+}
+
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
     }
 }
 
