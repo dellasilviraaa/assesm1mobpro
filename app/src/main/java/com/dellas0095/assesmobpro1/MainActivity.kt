@@ -13,7 +13,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DropdownMenu
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -31,8 +34,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -88,7 +91,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         else -> 0
     }
 
-    val context = LocalContext.current
+
     Column(
         modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Top,
@@ -148,6 +151,38 @@ fun ScreenContent(modifier: Modifier = Modifier) {
 
                         }
                     )
+                }
+            }
+        }
+        Button(
+            onClick = { showResult = true},
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.submit))
+        }
+        if (showResult) {
+            Card (
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFE0F9FF)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                elevation = CardDefaults.cardElevation(4.dp),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = "Detail Pemesanan",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = Color(0xFFBF360C)
+                    )
+                    Text(text = "Nama: $nama", style = MaterialTheme.typography.bodySmall)
+                    Text(text = "Lokasi: $lokasi", style = MaterialTheme.typography.bodySmall)
+                    Text(text = "Layanan: $layanan", style = MaterialTheme.typography.bodySmall)
+                    Text(text = "Harga Layanan: Rp$harga", style = MaterialTheme.typography.bodySmall)
+
                 }
             }
         }
